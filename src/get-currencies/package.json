@@ -1,0 +1,19 @@
+{
+  "name": "get-currencies",
+  "version": "1.0.0",
+  "description": "Lambda to retrieve converted currencies",
+  "main": "get-currencies.js",
+  "repository": "https://github.com/gavincornwell/currency-converter",
+  "author": "Gavin Cornwell",
+  "license": "Apache 2.0",
+  "dependencies": {
+    "axios": "^0.18.0"
+  },
+  "scripts": {
+    "test": "mocha tests/unit/"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^6.1.4"
+  }
+}

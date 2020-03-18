@@ -1,0 +1,25 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Transform: AWS::Serverless-2016-10-31
+
+Globals:
+  Function:
+    Timeout: 15
+    Runtime: nodejs12.x
+
+Resources:
+  GetCurrenciesFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: src/get-currencies
+      Handler: get-currencies.handler
+      Events:
+        HelloWorld:
+          Type: Api
+          Properties:
+            Path: /currencies
+            Method: get
+
+Outputs:
+  HelloWorldApi:
+    Description: "API URL"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/"

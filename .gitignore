@@ -102,3 +102,12 @@ dist
 
 # TernJS port file
 .tern-port
+
+# SAM config file
+samconfig.toml
+
+# SAM build folder
+.aws-sam
+
+# Mac
+.DS_Store
