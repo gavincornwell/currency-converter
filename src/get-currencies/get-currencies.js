@@ -7,36 +7,88 @@ exports.handler = async (event, context) => {
     let response;
     
     try {
-        console.debug("Received event", event);
+        //console.debug("Received event", event);
 
-        // retrieve the amount to convert from the path parameters
-        
-        // logger.info(`Trial '${trialId}' created for leadId '${leadId}' at '${now}'`);
+        // retrieve the amount to convert from the queryStringParameters
+        let amount = event.queryStringParameters.amount;
+        console.log(`Received amount: ${amount}`);
+
+        // if amount is not valid return a 404 response
+        if (!amount || isNaN(amount)) {
+            return {
+                statusCode: 400,
+                body: JSON.stringify({
+                    message: "Invalid or missing amount"
+                })
+            };
+        }
 
         // retrieve configuration from the DB
         // NOTE: in a real app the userId would be determined during login
+        let userId = "0d5367b6-6a1c-11ea-bc55-0242ac130003";
+        
+        let base = "GBP";
+        let symbols = "EUR,USD";
 
-        // call the Rates API (https://ratesapi.io/documentation/) to retrieve symbols
-        let url = "https://api.ratesapi.io/api/latest?base=USD&symbols=GBP";
-        // const ret = await axios(url);
+        // get the current rates
+        let ratesResult = await this.retrieveRates(base, symbols);
 
-        // do the conversions
+        // generate the result body
+        let body = this.generateResultBody(ratesResult, amount);
 
         // return the response
-        response = {
-            'statusCode': 200,
-            'body': JSON.stringify({
-                message: 'hello world',
-                // location: ret.data.trim()
-            })
-        }
+        return {
+            statusCode: 200,
+            body: JSON.stringify(body)
+        };
     } catch (err) {
         console.error(err);
 
         // return a 500 error response
+        return {
+            statusCode: 500,
+            body: JSON.stringify({
+                message: err.message
+            })
+        };
+    }
+};
 
-        return err;
+/**
+ * Retrieves the currency rates
+ */
+exports.retrieveRates = async (from, to) => {
+    
+    // use the Rates API (https://ratesapi.io/documentation/) to retrieve symbols
+    let url = `https://api.ratesapi.io/api/latest?base=${from}&symbols=${to}`;
+    
+    console.log("Calling url: " + url);
+    const response = await axios(url);
+    console.log("Response status: " + response.status);
+    console.log("Response data: " + JSON.stringify(response.data, null, 2));
+
+    return response.data;
+}
+
+exports.generateResultBody = (ratesResult, amount) => {
+    
+    var body = {
+        from: {
+            currency: ratesResult.base,
+            amount: amount
+        },
+        to: []
+    };
+
+    // do the conversions
+    for (const symbol in ratesResult.rates) {
+        let to = {
+            currency: symbol,
+            rate: ratesResult.rates[symbol],
+            amount: ratesResult.rates[symbol] * amount
+        }
+        body.to.push(to);
     }
 
-    return response
+    return body;
 };

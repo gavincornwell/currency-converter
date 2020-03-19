@@ -18,7 +18,9 @@
         "X-Forwarded-Port": "443",
         "X-Forwarded-Proto": "https"
     },
-    "queryStringParameters": null,
+    "queryStringParameters": { 
+        "amount": "15" 
+    },
     "multiValueQueryStringParameters": null,
     "pathParameters": null,
     "stageVariables": null,
