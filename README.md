@@ -116,5 +116,5 @@ newman run postman-collection.json --global-var apiUrl=<api-url>
 To delete the deployment run the following command, replacing `<stack-name>` with the name of the stack you provided during the `sam deploy` step.
 
 ```bash
-aws cloudformation delete <stack-name>
+aws cloudformation delete-stack --stack-name <stack-name>
 ```
