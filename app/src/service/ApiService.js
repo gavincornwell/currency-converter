@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_BASE_URL = 'https://ybmclr2c64.execute-api.us-east-1.amazonaws.com/Prod';
+const API_BASE_URL = '<api-url>';
 
 class ApiService {
 
