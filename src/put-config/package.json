@@ -1,14 +1,12 @@
 {
-  "name": "get-currencies",
+  "name": "put-config",
   "version": "1.0.0",
-  "description": "Lambda to retrieve converted currencies",
-  "main": "get-currencies.js",
+  "description": "Lambda to update configuration",
+  "main": "put-config.js",
   "repository": "https://github.com/gavincornwell/currency-converter",
   "author": "Gavin Cornwell",
   "license": "Apache 2.0",
-  "dependencies": {
-    "axios": "^0.18.0"
-  },
+  "dependencies": {},
   "scripts": {
     "test": "mocha tests/unit/"
   },
