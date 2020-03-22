@@ -4,7 +4,7 @@ This repository contains a Serverless app to convert currencies.
 
 ## Prerequisites
 
-* An AWS account
+* An AWS account with Admin access
 * [Install AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html)
 * [Install SAM CLI](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-install.html)
 * [Install Node](https://nodejs.org/en/download/)
@@ -22,9 +22,9 @@ cd ..
 Setup dependencies for the update config API by executing the following commands:
 
 ```bash
-cd src/put-config
+cd put-config
 npm install
-cd ..
+cd ../..
 ```
 
 Setup dependencies for the front end app by executing the following commands:
@@ -96,9 +96,9 @@ cd ..
 To run the unit tests for the update config API execute the following commands:
 
 ```bash
-cd src/put-config
+cd put-config
 npm run test
-cd ..
+cd ../..
 ```
 
 ## Running Integration Tests
