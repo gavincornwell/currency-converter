@@ -111,3 +111,6 @@ samconfig.toml
 
 # Mac
 .DS_Store
+
+# React app build folder
+app/build
